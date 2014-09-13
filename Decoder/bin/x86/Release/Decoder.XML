@@ -1,0 +1,407 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Decoder</name>
+    </assembly>
+    <members>
+        <member name="T:Observer.Decode.Decoder">
+            <summary>
+            Provides methods and properties for decoding CME FIX 5.0 SP2 messages.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Decoder.OnHeaderParsed(Observer.Decode.Header)">
+            <summary>
+            Wrapper around the 'HeaderParsed' event, called when the header of a message has been parsed.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Decoder.OnTradeParsed(Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Wrapper around the 'TradeParsed' event, called when a trade update has been parsed.
+            </summary>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Decode.Decoder.OnQuoteParsed(Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Wrapper around the 'QuoteParsed' event, called when a quote update has been parsed.
+            </summary>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Decode.Decoder.#ctor">
+            <summary>
+            Provides methods and properties for decoding FIX messages.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Decoder.DecodeHistorical(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Decodes a CME FIX 5.0 SP2 data set.
+            </summary>
+            <param name="rawFiles"></param>
+        </member>
+        <member name="E:Observer.Decode.Decoder.HeaderParsed">
+            <summary>
+            Fires when the header of a message has been parsed.
+            </summary>
+        </member>
+        <member name="E:Observer.Decode.Decoder.MessageParsed">
+            <summary>
+            Fires when an entire message has been completely parsed.
+            </summary>
+        </member>
+        <member name="E:Observer.Decode.Decoder.TradeParsed">
+            <summary>
+            Fires when a trade update block has been parsed.
+            </summary>
+        </member>
+        <member name="E:Observer.Decode.Decoder.QuoteParsed">
+            <summary>
+            Fires when a quote update block has been parsed.
+            </summary>
+        </member>
+        <member name="E:Observer.Decode.Decoder.DecodeComplete">
+            <summary>
+            Fires when the decode operation is complete.
+            </summary>
+        </member>
+        <member name="E:Observer.Decode.Decoder.DecodeStarted">
+            <summary>
+            Fires when the first timestamp has been parsed from the first file to be processed.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Decoder.HeaderEventHandler">
+            <summary>
+            Represents methods which handle events related to Header objects.
+            </summary>
+            <param name="header"></param>
+        </member>
+        <member name="T:Observer.Decode.Decoder.MessageEventHandler">
+            <summary>
+            Represents methods which handle events related to Message objects.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:Observer.Decode.Decoder.UpdateEventHandler">
+            <summary>
+            Represents methods which handle events related to Update objects.
+            </summary>
+            <param name="update"></param>
+        </member>
+        <member name="T:Observer.Decode.Decoder.DecodeStatusEventHandler">
+            <summary>
+            Represents methods which handle events related to changes in the status of the decode operation.
+            </summary>
+            <param name="timestamp"></param>
+        </member>
+        <member name="T:Observer.Decode.FieldInfo`1">
+            <summary>
+            Represents properties for storing information about the 'value' component of each tag/value pair.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.FieldInfo`1.#ctor(System.Int32)">
+            <summary>
+            Represents properties for storing information about the 'value' component of each tag/value pair.
+            </summary>
+            <param name="maxContentsLength">Needs to be greater than the largest max value length as specified in the 'SDKFFMessageSpecs2012.pdf' document (v2.20, 05/01/2012).</param>
+        </member>
+        <member name="T:Observer.Decode.Header">
+            <summary>
+            Provides properties for storing and retrieving CME FIX header fields.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Update">
+            <summary>
+            Base class from which all market data update types (MarketDataIncrementalRefresh, SecurityStatus, etc.) are derived.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Update.#ctor">
+            <summary>
+            Base class from which all market data update types (MarketDataIncrementalRefresh, SecurityStatus, etc.) are derived.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Update.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Base class from which all market data update types (MarketDataIncrementalRefresh, SecurityStatus, etc.) are derived.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Header.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer,Observer.Decode.Decoder)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX header fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Header.IsHeaderEnd">
+            <summary>
+            Parses the header of a message and checks to see if the end of the header has been reached.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Observer.Decode.IParsable">
+            <summary>
+            Provides methods for parsing FIX fields.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Logon">
+            <summary>
+            Provides properties for storing and retrieving CME FIX logon fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Logon.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX logon fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Logon.Parse">
+            <summary>
+            Parses each field of a Logon update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Logout">
+            <summary>
+            Provides properties for storing and retrieving CME FIX logout fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Logout.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX logout fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Logout.Parse">
+            <summary>
+            Parses each field of a Logout update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.MarketDataIncrementalRefresh">
+            <summary>
+            Provides properties for storing and retrieving CME FIX market data incremental refresh fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataIncrementalRefresh.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer,Observer.Decode.Decoder)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX market data incremental refresh fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataIncrementalRefresh.Parse">
+            <summary>
+            Parses each field of a MarketDataIncrementalRefresh update.
+            </summary>
+        </member>
+        <member name="P:Observer.Decode.MarketDataIncrementalRefresh.DataBlock">
+            <summary>
+            Contains fields found in the repeating group block of each update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup">
+            <summary>
+            Represents the market data incremental refresh repeating group message block.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup.#ctor">
+            <summary>
+            Represents the market data incremental refresh repeating group message block.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.MarketDataRequest">
+            <summary>
+            Provides properties for storing and retrieving CME FIX market data request fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataRequest.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX market data request fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataRequest.Parse">
+            <summary>
+            Parses each field of a MarketDataRequest update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.MarketDataSnapshotFullRefresh">
+            <summary>
+            Provides properties for storing and retrieving CME FIX market data snapshot full refresh fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataSnapshotFullRefresh.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX market data snapshot full refresh fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataSnapshotFullRefresh.Parse">
+            <summary>
+            Parses each field of a MarketDataSnapshotFullRefresh update.
+            </summary>
+        </member>
+        <member name="P:Observer.Decode.MarketDataSnapshotFullRefresh.DataBlock">
+            <summary>
+            Contains fields found in the repeating group block of each update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.MarketDataSnapshotFullRefresh.RepeatingGroup">
+            <summary>
+            Represents the market data snapshot full refresh repeating group message block.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.MarketDataSnapshotFullRefresh.RepeatingGroup.#ctor">
+            <summary>
+            Represents the market data snapshot full refresh repeating group message block.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Message">
+            <summary>
+            Represents a single CME FIX message.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.Message.#ctor">
+            <summary>
+            Represents a single CME FIX message.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.PerformanceHelper">
+            <summary>
+            Provides methods used for tuning performance.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.PerformanceHelper.#ctor">
+            <summary>
+            Provides methods used for tuning performance.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.PerformanceHelper.ApplyPerformanceSettings">
+            <summary>
+            Sets process priority, sets GC latency mode, and pegs the decoder thread to a given processor.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.QuoteRequest">
+            <summary>
+            Provides properties for storing and retrieving CME FIX quote request fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.QuoteRequest.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX quote request fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.QuoteRequest.Parse">
+            <summary>
+            Parses each field of a QuoteRequest update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.SecurityDefinition">
+            <summary>
+            Provides properties for storing and retrieving CME FIX security definition fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.SecurityDefinition.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX security definition fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.SecurityDefinition.Parse">
+            <summary>
+            Parses each field of a SecurityDefinition update.
+            </summary>
+        </member>
+        <member name="P:Observer.Decode.SecurityDefinition.DataBlockEvent">
+            <summary>
+            Contains fields found in the repeating group (for fields relating to the 'EventType' tag) block of each update.
+            </summary>
+        </member>
+        <member name="P:Observer.Decode.SecurityDefinition.DataBlockMDFeedType">
+            <summary>
+            Contains fields found in the repeating group (for fields relating to the 'MDFeedType' tag) block of each update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.SecurityDefinition.RepeatingGroupEvent">
+            <summary>
+            Represents the security definition repeating group message block for fields relating to the 'EventType' tag.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.SecurityDefinition.RepeatingGroupEvent.#ctor">
+            <summary>
+            Represents the security definition repeating group message block for fields relating to the 'EventType' tag.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.SecurityDefinition.RepeatingGroupMDFeedType">
+            <summary>
+            Represents the security definition repeating group message block for fields relating to the 'MDFeedType' tag.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.SecurityDefinition.RepeatingGroupMDFeedType.#ctor">
+            <summary>
+            Represents the security definition repeating group message block for fields relating to the 'MDFeedType' tag.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.SecurityStatus">
+            <summary>
+            Provides properties for storing and retrieving CME FIX security status fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.SecurityStatus.#ctor(Observer.Decode.FieldInfo{System.Byte},Observer.Decode.FieldInfo{System.Byte},Observer.Decode.Trailer)">
+            <summary>
+            Provides properties for storing and retrieving CME FIX security status fields.
+            </summary>
+        </member>
+        <member name="M:Observer.Decode.SecurityStatus.Parse">
+            <summary>
+            Parses each field of a SecurityStatus update.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.Header">
+            <summary>
+            Byte representations of CME FIX header tags.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.Trailer">
+            <summary>
+            Byte representations of CME FIX trailer tags.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.Logout">
+            <summary>
+            Byte representations of CME FIX logout tags. Tag 35=5.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.Logon">
+            <summary>
+            Byte representations of CME FIX logon tags.  Tag 35=A.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.SecurityDefinition">
+            <summary>
+            Byte representations of CME FIX security definition tags.  Tag 35=d.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.SecurityStatus">
+            <summary>
+            Byte representations of CME FIX security status tags.  Tag 35=f.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.QuoteRequest">
+            <summary>
+            Byte representations of CME FIX quote request tags.  Tag 35=R.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.MarketDataRequest">
+            <summary>
+            Byte representations of CME FIX market data request tags.  Tag 35=V.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.MarketDataSnapshotFullRefresh">
+            <summary>
+            Byte representations of CME FIX market data snapshot full refresh tags.  Tag 35=W.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Tag.MarketDataIncrementalRefresh">
+            <summary>
+            Byte representations of CME FIX market data incremental refresh tags.  Tag 35=X.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Trailer">
+            <summary>
+            Provides properties for storing and retrieving CME FIX trailer fields.
+            </summary>
+        </member>
+        <member name="T:Observer.Decode.Value.NullEnumerations">
+            <summary>
+            Instead of using nullable types, which I felt would introduce too much overhead.
+            </summary>
+        </member>
+    </members>
+</doc>

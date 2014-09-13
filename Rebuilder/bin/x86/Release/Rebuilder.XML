@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rebuilder</name>
+    </assembly>
+    <members>
+        <member name="T:Observer.Rebuild.ContractMonth">
+            <summary>
+            Represents both the name and the rollover date of a given contract month.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.ContractMonth.#ctor(System.Char[],System.DateTime)">
+            <summary>
+            Represents both the name and the rollover date of a given contract month.
+            </summary>
+            <param name="name"></param>
+            <param name="rolloverDate">The date on which the given contract month is no longer valid.</param>
+        </member>
+        <member name="P:Observer.Rebuild.ContractMonth.RolloverDate">
+            <summary>
+            The date on which the given contract month is no longer valid.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.ExtensionMethods.Matches(System.Char[],System.Char[])">
+            <summary>
+            Returns 'true' if the input char[] matches the calling char[].
+            </summary>
+            <param name="array"></param>
+            <param name="otherArray"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.ExtensionMethods.GetId(Observer.Decode.FieldInfo{System.Char})">
+            <summary>
+            Computes an instrument ID from a FieldInfo input.
+            </summary>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.ExtensionMethods.GetId(System.Char[])">
+            <summary>
+            Computes an instrument ID from a char[] input.
+            </summary>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.ExtensionMethods.IsWithinCacheRangeOf(System.DateTime,System.DateTime)">
+            <summary>
+            Returns 'true' if the input DateTime object has the same Date property as the calling DateTime object.
+            </summary>
+            <param name="inputTime"></param>
+            <param name="otherTime"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Observer.Rebuild.FileHelper">
+            <summary>
+            Provides methods and properties used for connecting the Decoder to the raw data set.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.FileHelper.#ctor">
+            <summary>
+            Provides methods and properties used for connecting the Decoder to the raw data set.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.FileHelper.GetFiles(System.String)">
+            <summary>
+            Used for parsing file paths from a directory, which can then be used as arguments for the Rebuilder.Rebuild method.
+            </summary>
+            <param name="dataDirectory"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Observer.Rebuild.Instrument">
+            <summary>
+            Provides methods and properties representing a tradable financial instrument.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.Instrument.#ctor(System.String)">
+            <summary>
+            Provides methods and properties representing a tradable financial instrument.
+            </summary>
+            <param name="filePath">The file path of the instrument's configuration file.</param>
+        </member>
+        <member name="M:Observer.Rebuild.Instrument.GetMonth(System.Int32,System.DateTime)">
+            <summary>
+            Selects the correct contract month given the input time.
+            </summary>
+            <param name="month">The month to be accessed.  Note that the front month contract has an index of zero.</param>
+            <param name="currentTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.Instrument.PertinentContracts(System.DateTime)">
+            <summary>
+            Returns an up-to-date list of the instrument's pertinent contracts, as defined by the instrument's configuration file.
+            </summary>
+            <param name="currentTime"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Observer.Rebuild.Instrument.Name">
+            <summary>
+            The name of the instrument.  This property is assigned from the name of the instrument's configuration file.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.Instrument.RolloverMap">
+            <summary>
+            Contains rollover dates and associated information for the given instrument.  This information is parsed from the instrument's configuration file.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.Instrument.PertinentContractMonths">
+            <summary>
+            A collection of Int32s representing the instrument IDs of the instrument's pertinent contracts.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.Instrument.TickSize">
+            <summary>
+            An Int32 representation of the instrument's tick size.
+            </summary>
+        </member>
+        <member name="T:Observer.Rebuild.InstrumentCollection">
+            <summary>
+            A collection of instruments, enabling the order books of multiple instruments to be rebuilt from the same file stream.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.InstrumentCollection.#ctor(System.String)">
+            <summary>
+            A collection of instruments, enabling the order books of multiple instruments to be rebuilt from the same file stream.
+            </summary>
+            <param name="directoryPath">The location of the directory in which the instrument configuration files are located.</param>
+        </member>
+        <member name="M:Observer.Rebuild.InstrumentCollection.PertinentContracts(System.DateTime)">
+            <summary>
+            Returns an up-to-date list of the pertinent contracts of all instruments in the collection, as defined by each instrument's configuration file.
+            </summary>
+            <param name="currentTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.InstrumentCollection.Add(Observer.Rebuild.Instrument)">
+            <summary>
+            Works the same as System.Collections.Generic.List's 'Add' function, but throws an exception if identical instruments are added.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="T:Observer.Rebuild.LastTradedPrice">
+            <summary>
+            Represents the last traded price of an instrument.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.LastTradedPrice.#ctor(System.Nullable{System.Int32},System.DateTime,System.Int32)">
+            <summary>
+            Represents the last traded price of an instrument.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.LastTradedPrice.CopyInto(Observer.Rebuild.LastTradedPrice)">
+            <summary>
+            Deep copies the calling LastTradedPrice to the LastTradedPrice object specified as a parameter.
+            </summary>
+            <param name="destinationLastTradedPrice"></param>
+        </member>
+        <member name="M:Observer.Rebuild.LastTradedPrice.GetDummy">
+            <summary>
+            Returns a new, "blank" LastTradedPrice object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Observer.Rebuild.OrderBook">
+            <summary>
+            Provides methods and properties which represent a CME limit order book.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Provides methods and properties which represent a CME limit order book.
+            </summary>
+            <param name="depth"></param>
+            <param name="instrumentId"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.#ctor(System.Int32)">
+            <summary>
+            Provides methods and properties which represent a CME limit order book.
+            </summary>
+            <param name="depth"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.CopyInto(Observer.Rebuild.OrderBook)">
+            <summary>
+            Deep copies the calling OrderBook to the OrderBook object specified as a parameter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.Build(Observer.Decode.Header,Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Applies the current update to the limit order book.
+            </summary>
+            <param name="header"></param>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.New(Observer.Decode.Header,Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Inserts a new price level into the limit order book.
+            </summary>
+            <param name="header"></param>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.Change(Observer.Decode.Header,Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Modifies a price level which is already displayed in the limit order book.
+            </summary>
+            <param name="header"></param>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.Delete(Observer.Decode.Header,Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Removes a price level from the limit order book.
+            </summary>
+            <param name="header"></param>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.Consolidate(Observer.Rebuild.OrderBook,Observer.Rebuild.OrderBook)">
+            <summary>
+            Consolidates the implied book and the outright book into a single limit order book.
+            </summary>
+            <param name="outrightOrderBook"></param>
+            <param name="impliedOrderBook"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.CommitTrade(System.Int32,System.DateTime,System.Int32)">
+            <summary>
+            Populates the LastTradedPrice property of the order book.
+            </summary>
+            <param name="price"></param>
+            <param name="time"></param>
+            <param name="size"></param>
+        </member>
+        <member name="M:Observer.Rebuild.OrderBook.IsPertinent(System.Collections.Generic.List{System.Int32},System.DateTime)">
+            <summary>
+            Returns 'true' if the InstrumentId property of the order book is pertinent, according to the collection of pertinent instrument IDs provided as an argument.
+            </summary>
+            <param name="pertinentContracts"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Observer.Rebuild.OrderBook.Bid">
+            <summary>
+            Represents all bid levels of an instrument.  Note that the best bid is index one, rather than index zero.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.OrderBook.Ask">
+            <summary>
+            Represents all offered levels of an instrument.  Note that the best offer is index one, rather than index zero.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.OrderBook.Depth">
+            <summary>
+            The number of order book depth levels supported by the instrument.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.OrderBook.LastTradedPrice">
+            <summary>
+            Represents an instrument's last trade.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.OrderBook.InstrumentId">
+            <summary>
+            An integer representation of an instrument's symbol.
+            </summary>
+        </member>
+        <member name="T:Observer.Rebuild.PriceLevel">
+            <summary>
+            Represents a single price level within the limit order book.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.PriceLevel.#ctor(System.Nullable{System.Int32},System.Int32,System.DateTime,System.Int32)">
+            <summary>
+            Represents a single price level within the limit order book.
+            </summary>
+            <param name="price"></param>
+            <param name="size"></param>
+            <param name="time"></param>
+            <param name="numberOfOrders"></param>
+        </member>
+        <member name="M:Observer.Rebuild.PriceLevel.#ctor(System.Nullable{System.Int32},System.Int32,System.Int32,System.DateTime,System.Int32)">
+            <summary>
+            Represents a single price level within the limit order book.  This signature is only used in the Consolidated (outright + implied) Book.
+            </summary>
+            <param name="price"></param>
+            <param name="size"></param>
+            <param name="impliedSize"></param>
+            <param name="time"></param>
+            <param name="numberOfOrders"></param>
+        </member>
+        <member name="M:Observer.Rebuild.PriceLevel.Delete(System.DateTime)">
+            <summary>
+            Resets all properties of the given PriceLevel to their defaults (except for the 'Time' property), and updates the 'Time' property.
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:Observer.Rebuild.PriceLevel.CopyInto(Observer.Rebuild.PriceLevel)">
+            <summary>
+            Deep copies the calling PriceLevel to the PriceLevel object specified as a parameter.
+            </summary>
+            <param name="destinationPriceLevel"></param>
+        </member>
+        <member name="M:Observer.Rebuild.PriceLevel.GetDummy">
+            <summary>
+            Returns a new, "blank" PriceLevel object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Observer.Rebuild.Rebuilder">
+            <summary>
+            Provides methods and properties for decoding CME FIX messages.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.#ctor(System.String)">
+            <summary>
+            Provides methods and properties for decoding CME FIX messages.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.Rebuild(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Rebuilds the limit order book from historical FIX messages.
+            </summary>
+            <param name="rawFiles"></param>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.OnHeaderParsed(Observer.Decode.Header)">
+            <summary>
+            Called when the header of a FIX message has been decoded.
+            </summary>
+            <param name="header"></param>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.OnTradeParsed(Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Called when a trade has been decoded from a market data incremental refresh FIX message.
+            </summary>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.OnQuoteParsed(Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Called when a quote has been decoded from a market data incremental refresh FIX message.
+            </summary>
+            <param name="update"></param>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.OnMessageParsed(Observer.Decode.Message)">
+            <summary>
+            Called when an entire FIX message has been decoded.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.OnDecodeComplete(System.DateTime)">
+            <summary>
+            Called when the decode operation has finished.
+            </summary>
+            <param name="timestamp"></param>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.OnDecodeStarted(System.DateTime)">
+            <summary>
+            Called when the decode operation has started.
+            </summary>
+            <param name="timestamp"></param>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.IsValidTrade(Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Uses various elements of a given message to determine whether or not a trade is valid.
+            </summary>
+            <param name="update"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.IsValidQuote(Observer.Decode.MarketDataIncrementalRefresh.RepeatingGroup)">
+            <summary>
+            Uses various elements of a given message to determine whether or not a quote is valid.
+            </summary>
+            <param name="update"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Observer.Rebuild.Rebuilder.IsValidMessage(Observer.Decode.Message)">
+            <summary>
+            Uses various elements of a given message to determine whether or not said message is valid.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Observer.Rebuild.Rebuilder.OrderBooks">
+            <summary>
+            A collection of each of the pertinent instruments' non-implied order books.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.Rebuilder.ImpliedOrderBooks">
+            <summary>
+            A collection of each of the pertinent instruments' implied order books.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.Rebuilder.ConsolidatedOrderBooks">
+            <summary>
+            A collection of each of the pertinent instruments' consolidated (non-implied + implied) order books.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.Rebuilder.DataDirectory">
+            <summary>
+            The directory from which the raw FIX data is read.
+            </summary>
+        </member>
+        <member name="P:Observer.Rebuild.Rebuilder.IsRebuildComplete">
+            <summary>
+            Returns 'true' if the order book rebuild operation is complete.
+            </summary>
+        </member>
+        <member name="T:Observer.Rebuild.RolloverMap">
+            <summary>
+            Represents a map of rollover dates and associated information.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.RolloverMap.#ctor">
+            <summary>
+            Represents a map of rollover dates and associated information.
+            </summary>
+        </member>
+        <member name="M:Observer.Rebuild.RolloverMap.Add(System.Collections.Generic.KeyValuePair{System.Int32,System.DateTime})">
+            <summary>
+            Works the same as System.Collections.Generic.List's 'Add' function, but throws an exception if identical elements are added.
+            </summary>
+            <param name="item"></param>
+        </member>
+    </members>
+</doc>

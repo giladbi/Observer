@@ -1,0 +1,7 @@
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\obj\x86\Release\Rebuilder.csprojResolveAssemblyReference.cache
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\bin\x86\Release\Rebuilder.dll
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\bin\x86\Release\Rebuilder.pdb
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\bin\x86\Release\Decoder.dll
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\bin\x86\Release\Decoder.pdb
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\obj\x86\Release\Rebuilder.dll
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\obj\x86\Release\Rebuilder.pdb

@@ -1,0 +1,6 @@
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Decoder\bin\x86\Release\Decoder.dll
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Decoder\bin\x86\Release\Decoder.pdb
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Decoder\obj\x86\Release\Decoder.dll
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Decoder\obj\x86\Release\Decoder.pdb
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Decoder\bin\x86\Release\Decoder.XML
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Decoder\obj\x86\Release\Decode.csprojResolveAssemblyReference.cache

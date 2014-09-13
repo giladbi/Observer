@@ -1,0 +1,5 @@
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\bin\Debug\Rebuilder.dll
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\bin\Debug\Rebuilder.pdb
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\obj\Debug\Rebuilder.csprojResolveAssemblyReference.cache
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\obj\Debug\Rebuilder.dll
+C:\Users\Tom\Documents\Visual Studio 2013\Projects\Observer\Rebuilder\obj\Debug\Rebuilder.pdb
